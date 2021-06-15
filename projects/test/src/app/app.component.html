@@ -1,0 +1,13 @@
+<h3> test ng-upload-image</h3>
+
+ <!-- (onResponse) = if need to get upload response on parent -->
+ <!-- [apiUrl]     = save point of upload  -->
+
+<ng-upload-image
+
+    (onResponse)="getUploadResponse($event)"   
+    [apiUrl]= "'http://localhost:3020/admin-api/admin/menu-upload'"
+
+></ng-upload-image>
+
+

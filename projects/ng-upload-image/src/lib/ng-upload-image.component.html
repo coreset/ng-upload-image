@@ -1,0 +1,29 @@
+
+<div class="container">
+
+    <!-- progress bar  -->
+    <div class="progress" *ngIf="uploadProgress"  style="margin: 5px 0px;" >
+        <div class="wrapper">
+            <div class="bar"  [style.width]="uploadProgress+'%'"   >{{uploadProgress}}%</div>
+        </div>
+    </div>
+
+    <!--control -->
+    <div clas="control">
+        <input type="file" name="imageUpload" id="imageUpload"  class="hide" multiple  (change)="onSelect($event)"/>
+        <label for="imageUpload" class="button" style="margin-right: 5px; margin-bottom: 5px;">Select files</label>
+
+        <button *ngIf="selectedUrls.length" type='button' class="button" style="margin-right: 5px; margin-bottom: 5px;" (click)="onUpload($event)">Upload</button>
+        <button *ngIf="selectedUrls.length" type='button' class="button" style="margin-right: 5px; margin-bottom: 5px;" (click)="onClear()">Clear</button>
+    </div>
+
+    <!-- pre-view  -->
+    <div class="pre-view">
+        <div class='img-box'  *ngFor='let url of selectedUrls'>
+            <!-- <div class="img-inner"></div> -->
+            <div class="dismiss" *ngIf="!uploadProgress" (click)="onDismiss($event)">&#10005;</div>
+            <img  class='image' [src]="url"  [style.width.px]="preViewSize" >
+        </div>
+    </div>
+
+</div>

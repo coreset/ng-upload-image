@@ -1,0 +1,17 @@
+{
+  "name": "ng-upload-image",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^10.0.14",
+    "@angular/core": "^10.0.14"
+  },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
+  "description": "upload images with ajax",
+  "author": {
+    "name":"samadhi laksahan",
+    "url":"https://mutx.ru"
+  },
+  "keywords": ["upload ","uploading image","images"]
+}
