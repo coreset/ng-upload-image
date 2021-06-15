@@ -1,27 +1,53 @@
-# NgUploadImage
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.8.
+# Installation
 
-## Development server
+This is a Angular component module for upload images.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+here we are using following package in component for deal with upload point.
+```javascript
+import { HttpClient } from '@angular/common/http';
+```
 
-## Code scaffolding
+### Installation is done using the npm install command:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+$ npm install ng-upload-image
+```
 
-## Build
+### insert module selector to &#10094;name&#10095;.component.html
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```javascript
+import { NgUploadImageModule } from 'ng-upload-image';
 
-## Running unit tests
+@NgModule({
+  declarations: [ /* ... */  ],
+  imports: [
+    /* ... */
+    NgUploadImageModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+})
+```
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### Insert module selector to &#10094;name&#10095;.component.html
 
-## Further help
+```html
+    <ng-upload-image  
+        [apiUrl]= "'http://localhost:3000/uploads'"
+    ></ng-upload-image>
+```
+### Get feedback
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```html
+    <ng-upload-image
+        (onResponse)="getUploadResponse($event)"  
+        [apiUrl]= "'http://localhost:3000/uploads'"
+    ></ng-upload-image>
+```
+if need to receive the uploaded response to the component then add <mark> (onResponse) </mark> event binder inside tags.   
+note: you have to create <mark> getUploadResponse(res) </mark> method in &#10094;name&#10095;.component.html
+
+

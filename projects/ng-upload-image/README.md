@@ -50,27 +50,3 @@ import { NgUploadImageModule } from 'ng-upload-image';
 if need to receive the uploaded response to the component then add <mark> (onResponse) </mark> event binder inside tags.   
 note: you have to create <mark> getUploadResponse(res) </mark> method in &#10094;name&#10095;.component.html
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-```html
-    <ng-upload-image
-        (onResponse)="getUploadResponse($event)"  
-        [apiUrl]= "'http://localhost:3000/uploads'"
-    ></ng-upload-image>
-```
