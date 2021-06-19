@@ -1,6 +1,7 @@
 {
   "name": "ng-upload-image",
-  "version": "0.0.1",
+  "version": "0.0.3",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^10.0.14",
     "@angular/core": "^10.0.14"
@@ -13,5 +14,9 @@
     "name":"samadhi laksahan",
     "url":"https://mutx.ru"
   },
-  "keywords": ["upload ","uploading image","images"]
+  "keywords": ["upload ","uploading image","images"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/coreset/ng-upload-image/"
+  }
 }

@@ -1,20 +1,22 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ContentChild, ElementRef, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { HttpClient,HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'ng-upload-image',
   templateUrl: './ng-upload-image.component.html',
-  styleUrls: ['./ng-upload-image.component.scss']
+  styleUrls: ['./ng-upload-image.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,// ChangeDetectionStrategy,
 })
 export class NgUploadImageComponent implements OnInit {
 
-
-  selectedUrls:Array<String>= [];
+  urls:Array<string>= [];
+  selectedUrls:Array<string>= [];
   selectedFiles:Array<File>= [];
   uploadProgress:number= 0;
 
   constructor(
-    private http:HttpClient
+    private http:HttpClient,
+    private cdref: ChangeDetectorRef
   ) { }
 
   @Input() validTypes:Array<string>=["image/png", "image/jpeg"];
@@ -22,12 +24,30 @@ export class NgUploadImageComponent implements OnInit {
   @Input() preViewSize:number= 100;
   @Input() apiUrl:string= "";
 
+
   @Output() onResponse = new EventEmitter();
+
+  @ViewChild('fileinput') fileInput : ElementRef; // get input tag element
+
+
+  @ContentChild('customProgressTemplate', {static:false}) customProgressTemplate :TemplateRef<any>; // for get ref from parent
+  @ContentChild('customControlTemplate',  {static:false}) customControlTemplate :TemplateRef<any>;  // for get ref from parent
+  @ContentChild('customPreviewTemplate',  {static:false}) customPreviewTemplate :TemplateRef<any>;  // for get ref from parent
 
 
   ngOnInit(): void {
     this.isValidDevInput();
   }
+
+  /* ********************************* */ 
+  /** //////////   render   \\\\\\\\\\ */ 
+  /* ********************************* */ 
+
+  detectChanges():void{
+    setTimeout(() => {this.cdref.detectChanges()}, 100);
+  }
+
+
 
   /* ********************************* */ 
   /** //////////  validate  \\\\\\\\\\ */ 
@@ -43,7 +63,7 @@ export class NgUploadImageComponent implements OnInit {
   }
 
   /**
-   * @property {Function} isValidType - set valid image type
+   * @property {Function} isValidType - check is valid image type
    * @param {type} - image type
    * @returns {boolean} - is valid or not.
    */
@@ -78,13 +98,15 @@ export class NgUploadImageComponent implements OnInit {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = (evnets: any) => {
-          this.selectedUrls.push(evnets.target.result);
           this.selectedFiles.push(file);
+          
+          this.selectedUrls.push(evnets.target.result); 
         }
       }else{
         console.log("Warning : ","This image format not allow");
       }
     }
+    this.detectChanges();
    
   }
 
@@ -123,7 +145,7 @@ export class NgUploadImageComponent implements OnInit {
             console.log('Error',res['message']);
           }
         }else{
-          console.log("other event :", event);
+          //console.log("other event :", event);
         }
       },
       error=>{
@@ -168,6 +190,19 @@ export class NgUploadImageComponent implements OnInit {
     
   }
 
+  /**
+   * @property {Function} onChoose - click choose button to upload images 
+   * @returns {void}
+   */
+  onChoose():void{
+    this.fileInput.nativeElement.click();
+  }
+
+  onFocus():void{}
+
+  onBlur():void{}
+
+
   /* ********************************* */ 
   /** //////////  setters   \\\\\\\\\\ */ 
   /* ********************************* */ 
@@ -189,7 +224,7 @@ export class NgUploadImageComponent implements OnInit {
    */
   setUploadProgress(ratio:number): void {
       this.uploadProgress = Math.round(ratio*100);
-      //console.log(" uploadProgress :", this.uploadProgress, ratio);
+      this.detectChanges();
   }
 
   /** 
@@ -219,4 +254,3 @@ export class NgUploadImageComponent implements OnInit {
   }
 
 }
-

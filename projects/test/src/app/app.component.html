@@ -10,4 +10,12 @@
 
 ></ng-upload-image>
 
+<ng-upload-image
+
+    (onResponse)="getUploadResponse($event)"   
+    [apiUrl]= "'http://localhost:3020/admin-api/admin/menu-upload'"
+
+></ng-upload-image>
+
+
 
