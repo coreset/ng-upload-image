@@ -183,7 +183,7 @@ export class NgUploadImageComponent implements OnInit {
    * @property {Function} onClear - clear the all images from select-to-upload
    * @returns {void}
    */
-   onClear():void{
+  onClear():void{
 
     this.selectedUrls.length = 0;
     this.selectedFiles.length =0;

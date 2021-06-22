@@ -52,3 +52,13 @@ note: you have to create <mark> getUploadResponse(res) </mark> method in &#10094
         [apiUrl]= "'http://localhost:3000/uploads'"
     ></ng-upload-image>
 ```
+
+#### set max upload count    
+this count value set to max image count to upload at once.  
+```html
+    <ng-upload-image
+        [maxUploadCount]="12"
+        (onResponse)="getUploadResponse($event)"  
+        [apiUrl]= "'http://localhost:3000/uploads'"
+    ></ng-upload-image>
+```
